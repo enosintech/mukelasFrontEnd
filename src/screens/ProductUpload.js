@@ -123,9 +123,11 @@ true,
   };
 
   return (
-    <View className="w-full h-full flex items-center justify-center">
+    <View className="w-full h-full flex items-center justify-center bg-white">
 
-        <TouchableOpacity className="absolute w-[40px] left-3 top-14 h-[40px] shadow border-[0.5px] border-gray-300 rounded-xl bg-white flex items-center justify-center">
+        <TouchableOpacity className="absolute z-50 w-[40px] left-3 top-14 h-[40px] shadow border-[0.5px] border-gray-300 rounded-xl bg-white flex items-center justify-center" onPress={() => {
+          navigation.goBack()
+        }}>
             <Ionicons name='chevron-back'size={25} color="black"/>
         </TouchableOpacity>
 
@@ -169,7 +171,7 @@ true,
 
             <View className="w-full h-[25%] flex items-center justify-center pt-1">
               <TouchableOpacity onPress={handleSubmit} className="w-[55%] h-[35%] rounded-2xl mt-[-10%] bg-[#614BC3] items-center justify-center">
-                <Text className="font-bold text-[20px] text-white">Add Product</Text>
+                <Text className="font-extrabold text-[15px] uppercase text-white">Add Product</Text>
               </TouchableOpacity>
             </View>
           </View>

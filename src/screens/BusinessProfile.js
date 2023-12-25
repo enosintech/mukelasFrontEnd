@@ -3,6 +3,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { BlurView } from "expo-blur";
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const BusinessProfile = () => {
     const [ visible, setVisible ] = useState(false);
@@ -28,15 +29,12 @@ const BusinessProfile = () => {
             </View>
         </BlurView> 
       </View>  
-      <View className="relative w-full h-[35%] bg-blue-500">
+      <View className="relative w-full h-[35%]">
         <ImageBackground 
-            className="w-full h-full flex items-center justify-center px-3 bg-blue-500"
+            className="w-full h-full flex items-center justify-center px-3 bg-[#BEADFA]"
         >
             <Text className="text-center">You could use a background color to match the business logo like I have done here, optionally, you could use a business branded background as you already designed</Text>
         </ImageBackground>
-        <TouchableOpacity className="absolute w-[40px] left-3 top-14 h-[40px] shadow border-[0.5px] border-gray-300 rounded-xl bg-white flex items-center justify-center">
-            <Ionicons name='chevron-back'size={25} color="black"/>
-        </TouchableOpacity>
         <View className="absolute w-[90px] h-[90px] rounded-full bg-white left-4 -bottom-12 flex items-center justify-center">
             <Image 
                 source={require("../../assets/images/zusLogo.png")}
@@ -51,19 +49,8 @@ const BusinessProfile = () => {
         <View className="w-full h-[20%] flex items-start justify-center overflow-scroll px-5">
             <Text className="text-justify font-light text-[15px]">Zus Coffee is a coffee company. They make coffee and are really good at it. Don't believe me? Try it. This bio sucks, Zus coffee isn't doing Zeus any favors. Also, is it Zus or Zeus?</Text>
         </View>
-        <View className="w-full h-[40%] border-t-[0.25px] border-b-[0.25px]">
-            <TouchableOpacity className="w-full h-1/3 border-t-[0.25px] border-b-[0.25px] flex flex-row items-center justify-between px-4">
-                <View className="flex flex-row items-center gap-1">
-                    <MaterialIcons name="account-box" size={25}/>
-                    <Text className="font-semibold text-[15px]">Account</Text>
-                </View>
-                <View>
-                    <TouchableOpacity>
-                        <Ionicons name="chevron-forward" size={20} color="gray"/>
-                    </TouchableOpacity>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity className="w-full h-1/3 border-t-[0.25px] border-b-[0.25px] flex flex-row items-center justify-between px-4">
+        <View className="w-full h-[28%] border-t-[0.25px] border-b-[0.25px]">
+            <TouchableOpacity className="w-full h-1/2 border-t-[0.25px] border-b-[0.25px] flex flex-row items-center justify-between px-4">
                 <View className="flex flex-row items-center gap-1">
                     <MaterialIcons name="notifications" size={25}/>
                     <Text className="font-semibold text-[15px]">Notifications</Text>
@@ -74,7 +61,7 @@ const BusinessProfile = () => {
                     </TouchableOpacity>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity className="w-full h-1/3 border-t-[0.25px] border-b-[0.25px] flex flex-row items-center justify-between px-4" onPress={() => {
+            <TouchableOpacity className="w-full h-1/2 border-t-[0.25px] border-b-[0.25px] flex flex-row items-center justify-between px-4" onPress={() => {
                 setVisible(!visible)
             }}>
                 <View className="flex flex-row items-center gap-1">

@@ -32,7 +32,7 @@ const BusinessOrders = () => {
         <View style={styles.timelineLine} />
       </View>
 
-      <View style={[styles.card, { backgroundColor: getRandomColor() }]}>
+      <View style={[styles.card, { backgroundColor: "white" }]}>
         <Text style={styles.cardTitle}>{item.item}</Text>
         <Text style={styles.cardDate}>{item.time}</Text>
         <FlatList
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    backgroundColor: '#ff7f50',
+    backgroundColor: '#614BC3',
     borderRadius: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -141,13 +141,13 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#ff7f50',
+    backgroundColor: '#614bc3',
     marginBottom: 8,
   },
   timelineLine: {
     flex: 1,
     width: 2,
-    backgroundColor: '#ff7f50',
+    backgroundColor: '#b4bec3',
   },
   cardTitle: {
     fontSize: 16,

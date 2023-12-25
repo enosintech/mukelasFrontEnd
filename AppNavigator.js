@@ -31,7 +31,7 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = createBottomTabNavigator();
 
-const CustomTabBarButton = ({children, onPress}) => {
+const CustomTabBarButton = ({children, onPress, name}) => {
   return (
       <TouchableOpacity 
           onPress={onPress}
@@ -51,7 +51,7 @@ const CustomTabBarButton = ({children, onPress}) => {
           className="shadow-xl">
               {children}
           </View>
-          <Text style={{top:10, fontWeight: "300", color: "gray"}}>Transactions</Text>
+          <Text style={{top:10, fontWeight: "300", color: "gray"}}>{name}</Text>
       </TouchableOpacity>
   )
 }
@@ -72,7 +72,7 @@ const StudentTabNavigator = () => {
       tabBarActiveTintColor: "#614BC3",
       tabBarInactiveTintColor: "gray"
     })}>
-      <Tab.Screen name="Name" component={StudentHomeScreen} options={{
+      <Tab.Screen name="Home" component={StudentHomeScreen} options={{
         tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={26}/>
         ),
@@ -85,7 +85,7 @@ const StudentTabNavigator = () => {
           <MaterialCommunityIcons name='calculator' color={"white"} size={size}/>
         ),
         tabBarButton: (props) => (
-          <CustomTabBarButton {...props} />
+          <CustomTabBarButton {...props} name="Transactions"/>
         ),
     }}/>
       <Tab.Screen name="Profile" component={StudentProfile} options={{
@@ -101,16 +101,33 @@ size={26}/>
 
 const BusinessTabNavigator = () => {
   return (
-    <Tabs.Navigator screenOptions={{headerShown: false}}>
-      <Tabs.Screen name="name" component={BusinessHome} options={{
+    <Tabs.Navigator screenOptions={{headerShown: false, tabBarStyle: {
+          position: "absolute",
+          borderTopLeftRadius: 40,
+          borderTopRightRadius: 40,
+          borderTopWidth: 0,
+          height: "11%",
+          backgroundColor: `white`,
+          ...styles.shadow,
+      },
+      tabBarActiveTintColor: "#614BC3",
+      tabBarInactiveTintColor: "gray"
+      }}>
+      <Tabs.Screen name="Home" component={BusinessHome} options={{
         tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={26}/>
         ),
     }} />
       <Tabs.Screen name="Orders" component={BusinessOrders} options={{
-        tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="basket-unfill" color={color} 
+        tabBarLabelStyle: {
+          display: "none"
+        },
+        tabBarIcon: ({ size }) => (
+            <MaterialCommunityIcons name="basket-unfill" color={"white"} 
 size={26}/>
+        ),
+        tabBarButton: (props) => (
+          <CustomTabBarButton {...props} name="Orders"/>
         ),
     }}/>
       <Tabs.Screen name="Profile" component={BusinessProfile} options={{
@@ -138,7 +155,7 @@ export const AppNavigator = () => {
         // Navigate the user accordingly
         if (isUserLoggedIn) {
           // User is already logged in, navigate to StudentHomeScreen
-          navigation.navigate('BusinessHome');
+          navigation.navigate('StudentHome');
         } else {
           // User is not logged in, show the GetStarted screen
           navigation.navigate('GetStarted');

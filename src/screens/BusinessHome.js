@@ -3,6 +3,8 @@ import { View, Text, TextInput, FlatList, Image, TouchableOpacity, StyleSheet } 
 import  MaterialCommunityIcons  from 
 'react-native-vector-icons/MaterialCommunityIcons';
 
+import ZusLogo from "../../assets/images/zusLogo.png";
+
 const BusinessHome = ({navigation}) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [products, setProducts] = useState([
@@ -45,15 +47,15 @@ const BusinessHome = ({navigation}) => {
   };
 
   const renderProductCard = ({ item }) => (
-    <View style={[styles.card, { backgroundColor: item.backgroundColor, borderTopWidth: 4, borderTopColor: item.titleColor }]}>
+    <View style={[styles.card, { backgroundColor: "white"}]}>
       <Image source={{ uri: item.image }} style={styles.productImage} />
-      <Text style={[styles.cardTitle, { color: item.titleColor }]}>{item.name}</Text>
+      <Text style={[styles.cardTitle, { color: "black" }]}>{item.name}</Text>
       <Text style={styles.cardPrice}>{item.price}</Text>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity style={styles.actionButton} className="bg-[#BEADFA] shadow">
           <Text style={styles.buttonText}>Edit</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity style={styles.actionButton} className="bg-gray-300 shadow">
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
       </View>
@@ -68,13 +70,16 @@ const BusinessHome = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Zus coffee</Text>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search..."
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-      />
+      <View className={`w-fit h-fit flex flex-row`}>
+        <Text className="text-[30px] font-bold text-gray-600">Edu</Text>
+        <Text className="text-[30px] font-bold text-[#614BC3]">Deals</Text>
+      </View>
+      <View className="flex flex-row items-center"> 
+        <Text style={styles.title}>Zus coffee</Text>
+      </View>
+      <View className="w-full h-[2%]">
+
+      </View>
       <FlatList
         contentContainerStyle={styles.listContainer}
         data={products.filter(searchFilter)}
@@ -84,21 +89,19 @@ const BusinessHome = ({navigation}) => {
       />
       <TouchableOpacity
     style={{
-      borderWidth: 1,
-      borderColor: 'rgba(0,0,0,0.2)',
       alignItems: 'center',
       justifyContent: 'center',
       width: 70,
       position: 'absolute',
-      bottom: 10,
+      bottom: 110,
       right: 10,
       height: 70,
-      backgroundColor: '#00FFFF',
-      borderRadius: 100,
+      backgroundColor: '#BEADFA',
+      borderRadius: 9999,
     }}
     onPress={Addproduct}
   >
-     <MaterialCommunityIcons name="plus" color="black" size={26}/>  
+     <MaterialCommunityIcons name="plus" color="white" size={26}/>  
 </TouchableOpacity>
     </View>
   );
@@ -115,8 +118,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   title: {
-    fontSize: 40,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '500',
     marginBottom: 10,
     paddingLeft: 20,
   },
@@ -132,11 +135,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 20,
     padding: 10,
-    borderRadius: 5,
     marginHorizontal: 7,
     borderRadius: 8,
     shadowColor: '#000',
-    shadowOpacity: 0.2,
+    shadowOpacity: 1,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 4,
     overflow: 'hidden', // Ensure the image doesn't overflow the card
@@ -161,15 +163,12 @@ const styles = StyleSheet.create({
   },
   actionButton: {
     marginTop: 15,
-    backgroundColor: '#DCDCDC',
-    padding: 5,
+    padding: 7,
     borderRadius: 5,
-    borderWidth: 2,
-    borderColor: '#00008B',
     marginRight: 10,
   },
   buttonText: {
-    color: '#00008B',
+    color: '#614BC3',
   },
 });
 
