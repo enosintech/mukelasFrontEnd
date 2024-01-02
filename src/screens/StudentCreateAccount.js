@@ -18,7 +18,6 @@ const StudentCreateAccount = ({ navigation }) => {
 
   const signIn = async () => {
     navigation.navigate('StudentLogin');
-
   }
 
   const signUp = async () => {
@@ -39,7 +38,6 @@ const StudentCreateAccount = ({ navigation }) => {
             lastname: lastName,
             email,
             password,
-          
         });
     
         console.log('Response from create-user:', res.data);
@@ -62,6 +60,8 @@ const StudentCreateAccount = ({ navigation }) => {
 
     } catch (error) {
       console.error('Error signing up:', error);
+      console.error('Error response data:', error.response.data);
+      console.error('Error response status:', error.response.status);
       // Handle error, e.g., display an error message to the user
     }
   };

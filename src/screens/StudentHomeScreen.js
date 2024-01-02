@@ -3,13 +3,18 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from '@react-navigation/native';
 
 import testImage from "../../assets/images/test.jpeg";
+import { useSelector } from 'react-redux';
+import { selectSelectedProducts } from '../../slices/navSlice';
 
 const InternationalDealsComponent = (props) => {
 
    const { width, height } = Dimensions.get('window');
+   const navigation = useNavigation();
 
     return (
-      <TouchableOpacity className={`w-[200px] h-[95%] flex items-center justify-center`}>
+      <TouchableOpacity className={`w-[200px] h-[95%] flex items-center justify-center`} onPress={() => {
+        navigation.navigate("StoreScreen")
+      }}>
         <View className={`w-[90%] h-[65%] rounded-md shadow border-[0.25px] border-gray-300 bg-white flex items-center justify-center`}>
           <Image source={testImage} className="w-full h-full object-cover rounded-md"/>
         </View>
@@ -28,8 +33,12 @@ const InternationalDealsComponent = (props) => {
 const LocalDealsComponent = (props) => {
   const { width, height } = Dimensions.get('window');
 
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity className={`w-[200px] h-[95%] flex items-center justify-center`}>
+    <TouchableOpacity className={`w-[200px] h-[95%] flex items-center justify-center`} onPress={() => {
+      navigation.navigate("StoreScreen")
+    }}>
       <View className={`w-[90%] h-[65%] rounded-md shadow border-[0.25px] border-gray-300 bg-white flex items-center justify-center`}>
         <Image source={testImage} className="w-full h-full object-cover rounded-md"/>
       </View>
@@ -68,6 +77,7 @@ const FeaturedDealsComponent = (props) => {
 
 const StudentHomeScreen = () => {
   const navigation = useNavigation();
+  const selectedProducts = useSelector(selectSelectedProducts);
   
   return (
     <SafeAreaView className="w-full h-[90%]">
@@ -76,10 +86,13 @@ const StudentHomeScreen = () => {
             <Text className="text-[30px] font-bold text-gray-600">Edu</Text>
             <Text className="text-[30px] font-bold text-[#614BC3]">Deals</Text>
           </View>
-          <TouchableOpacity className="w-[40px] h-[40px] flex items-center justify-center" onPress={() => {
+          <TouchableOpacity className="relative w-[40px] h-[40px] flex items-center justify-center" onPress={() => {
              navigation.navigate("Cartscreen")
           }}>
             <Ionicons name='cart-outline' size={25} color="black"/>
+            <View className={`absolute w-[13px] h-[13px] top-1 right-1 rounded-full bg-red-700 flex items-center justify-center transition-all duration-200 ${selectedProducts.length > 0 ? "opacity-100" : "opacity-0"}`}>
+              <Text className="text-white text-[10px]">{selectedProducts.length}</Text>
+            </View>
           </TouchableOpacity>
         </View>
 

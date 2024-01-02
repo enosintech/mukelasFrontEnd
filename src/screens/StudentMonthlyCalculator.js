@@ -49,7 +49,7 @@ const StudentMonthlyCalculator = () => {
     // Fetch transactions from the backend
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get('http://your-backend-url/api/transactions');
+        const response = await axios.get('http://localhost:4057/api/transactions');
         const fetchedTransactions = response.data;
 
         // Calculate spent and earned amounts
@@ -72,11 +72,13 @@ const StudentMonthlyCalculator = () => {
     fetchTransactions();
   }, []);
 
+  console.log(transactions)
+
   const addTransaction = async (type, amount) => {
     try {
-      await axios.post('http://your-backend-url/api/transactions', { type, amount });
+      await axios.post('http://localhost:4057/api/transactions', { type, amount });
       // Refresh transactions after adding a new one
-      const response = await axios.get('http://your-backend-url/api/transactions');
+      const response = await axios.get('http://localhost:4057/api/transactions');
       const fetchedTransactions = response.data;
 
       // Calculate spent and earned amounts

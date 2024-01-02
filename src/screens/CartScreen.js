@@ -1,22 +1,17 @@
 import React, { useState } from 'react'
-import { View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Button, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import Ionicons from "@expo/vector-icons/Ionicons";
-
-const items = [
-  { id: 1, name: 'Item 1', price: '$10', quantity: 1, image: 'https://www.bootdey.com/image/280x280/00FFFF/000000' },
-  { id: 2, name: 'Item 2', price: '$20', quantity: 1, image: 'https://www.bootdey.com/image/280x280/FF00FF/000000' },
-  { id: 3, name: 'Item 3', price: '$30', quantity: 1, image: 'https://www.bootdey.com/image/280x280/FF7F50/000000' },
-]
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSelectedProducts, setSelectedProducts } from '../../slices/navSlice';
 
 const ShoppingCart = () => {
-  const [cartItems, setCartItems] = useState(items)
-
-  const addItem = item => {
-    setCartItems([...cartItems, item])
-  }
+  const dispatch = useDispatch();
+  const selectedProducts = useSelector(selectSelectedProducts);
+  const [cartItems, setCartItems] = useState(selectedProducts)
 
   const removeItem = item => {
-    setCartItems(cartItems.filter(i => i !== item))
+    dispatch(setSelectedProducts(selectedProducts.filter(i => i !== item)))
+    setCartItems(selectedProducts)
   }
 
   const increaseQuantity = item => {
@@ -42,23 +37,27 @@ const ShoppingCart = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.tittle}>Shopping Cart</Text>
-      {cartItems.map(item => (
-        <View key={item.id} style={styles.itemContainer}>
-          <Image source={{ uri: item.image }} style={styles.image} />
-          <View style={styles.infoContainer}>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.price}>{item.price}</Text>
+      <View className="h-[60%] w-full">
+        <ScrollView className="w-full">
+          {cartItems.map(item => (
+          <View key={item} style={styles.itemContainer}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <View style={styles.infoContainer}>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.price}>{item.price}</Text>
+            </View>
+            <View style={styles.quantityContainer}>
+              <Button color={"#614BC3"} title="-" onPress={() => decreaseQuantity(item)} />
+              <Text>{item.quantity}</Text>
+              <Button color={"#614BC3"} title="+" onPress={() => increaseQuantity(item)} />
+            </View>
+            <TouchableOpacity style={styles.removeButton} onPress={() => removeItem(item)}>
+              <Ionicons name='trash-sharp' size={20}/>
+            </TouchableOpacity>
           </View>
-          <View style={styles.quantityContainer}>
-            <Button color={"#614BC3"} title="-" onPress={() => decreaseQuantity(item)} />
-            <Text>{item.quantity}</Text>
-            <Button color={"#614BC3"} title="+" onPress={() => increaseQuantity(item)} />
-          </View>
-          <TouchableOpacity style={styles.removeButton} onPress={() => removeItem(item)}>
-            <Ionicons name='trash-sharp' size={20}/>
-          </TouchableOpacity>
-        </View>
-      ))}
+        ))}
+        </ScrollView>
+      </View>
       <TouchableOpacity className="w-[60%] h-[8%] rounded-full bg-[#614BC3] flex items-center justify-center">
         <Text className="font-extrabold uppercase text-white text-[16px]">Check Out</Text>
       </TouchableOpacity>

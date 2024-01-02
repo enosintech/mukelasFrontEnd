@@ -72,7 +72,7 @@ const StudentTabNavigator = () => {
       tabBarActiveTintColor: "#614BC3",
       tabBarInactiveTintColor: "gray"
     })}>
-      <Tab.Screen name="Home" component={StudentHomeScreen} options={{
+      <Tab.Screen name="Home" component={HomeNavigator} options={{
         tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={26}/>
         ),
@@ -140,11 +140,21 @@ size={26}/>
   );
 };
 
+const HomeNavigator = () => {
+  return (
+    <Stack.Navigator initialRouteName='StudentHomeScreen' screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="StudentHomeScreen" component={StudentHomeScreen} />
+      <Stack.Screen name="StoreScreen" component={StoreScreen} />
+      <Stack.Screen name="Cartscreen" component={Cartscreen} />
+    </Stack.Navigator>
+  )
+}
+
 
 export const AppNavigator = () => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true)
 
   const navigation = useNavigation();
+  const [ isUserLoggedIn, setIsUserLoggedIn ] = useState(true);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -175,19 +185,16 @@ export const AppNavigator = () => {
         <Stack.Screen name="VerifyOtp" component={VerifyOtp} screenOptions={{headerShown: false}} />
         <Stack.Screen name="BusinessHome" component={BusinessTabNavigator} />
         <Stack.Screen name="ProductUpload" component={ProductUpload} />
-        <Stack.Screen name="Cartscreen" component={Cartscreen} />
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="StudentCreateAccount" component={StudentCreateAccount} />
         <Stack.Screen name="StudentLogin" component={StudentLogin} />
         <Stack.Screen name="StudentHome" component={StudentTabNavigator} />
-        <Stack.Screen name="StoreScreen" component={StoreScreen} />
         <Stack.Screen name="BusinessCreateAccount" component={BusinessCreateAccount} />
         <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
         <Stack.Screen name="BusinessLogin" component={BusinessLogin} />
         <Stack.Screen name="StudentProfile" component={StudentProfile} />
         <Stack.Screen name="AddTransaction" component={AddTransaction} />
         <Stack.Screen name="BusinessOnboarding" component={BusinessOnboarding} />
-        <Stack.Screen name="StudentHomeScreen" component={StudentHomeScreen} />
       </Stack.Navigator>
   );
 };
